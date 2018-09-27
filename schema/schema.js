@@ -41,11 +41,19 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    companies: {
+      type: new GraphQLList(CompanyType),
+      resolve: () => axios.get('http://127.0.0.1:3000/companies')
+    },
     company: {
       type: CompanyType,
       args: { id: { type: GraphQLString } },
       resolve: (parentValue, args) =>
         axios.get(`http://127.0.0.1:3000/companies/${args.id}`)
+    },
+    users: {
+      type: new GraphQLList(UserType),
+      resolve: () => axios.get('http://127.0.0.1:3000/users')
     },
     user: {
       type: UserType,
@@ -62,17 +70,28 @@ const mutation = new GraphQLObjectType({
     addUser: {
       type: UserType,
       args: {
-        firstName: { type: GraphQLNonNull(GraphQLString) },
-        age: { type: GraphQLNonNull(GraphQLInt) },
+        firstName: { type: new GraphQLNonNull(GraphQLString) },
+        age: { type: new GraphQLNonNull(GraphQLInt) },
         companyId: { type: GraphQLString }
       },
       resolve: (parentValue, { firstName, age, companyId }) =>
         axios.post(`http://127.0.0.1:3000/users`, { firstName, age, companyId })
     },
+    editUser: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        firstName: { type: GraphQLString },
+        age: { type: GraphQLInt },
+        companyId: { type: GraphQLString }
+      },
+      resolve: (parentValue, { id, ...rest }) =>
+        axios.patch(`http://127.0.0.1:3000/users/${id}`, rest)
+    },
     deleteUser: {
       type: UserType,
       args: {
-        id: { type: GraphQLNonNull(GraphQLString) }
+        id: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve: (parentValue, { id }) =>
         axios.delete(`http://127.0.0.1:3000/users/${id}`)
