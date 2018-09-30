@@ -7,6 +7,8 @@ module.exports = {
     path: '/',
     filename: 'bundle.js'
   },
+  devtool: 'eval',
+  mode: 'development',
   module: {
     rules: [
       {
