@@ -7,6 +7,7 @@ export const query = gql`
       title
       lyrics {
         id
+        likes
         content
       }
     }

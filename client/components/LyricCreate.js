@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 
 import mutation from '../queries/add-lyric';
-import query from '../queries/fetch-song';
 
 class LyricCreate extends Component {
   state = {
@@ -25,7 +24,6 @@ class LyricCreate extends Component {
 
     mutate({
       variables: { id, content },
-      refetchQueries: [{ query, variables: { id } }]
     })
       .then(this.clearContent)
       .catch(this.clearContent);
