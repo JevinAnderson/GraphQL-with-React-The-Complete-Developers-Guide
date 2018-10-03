@@ -1,9 +1,5 @@
 import React from 'react';
 
-const App = ({ children, ...rest }) => (
-  <div className="container" {...rest}>
-    {children}
-  </div>
-);
+const App = ({ children }) => <div className="container">{children}</div>;
 
 export default App;

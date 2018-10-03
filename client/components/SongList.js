@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 
-const query = gql`
-  {
-    songs {
-      id
-      title
-    }
-  }
-`;
+import query from '../queries/fetch-songs';
+import SongListItem from './SongListItem';
 
 class SongList extends Component {
   render() {
@@ -25,9 +18,7 @@ class SongList extends Component {
       <div className="song-list">
         <ul className="collection">
           {songs.map(song => (
-            <li key={song.id} className="collection-item">
-              {song.title}
-            </li>
+            <SongListItem key={song.id} refetch={this.props.data.refetch} {...song} />
           ))}
         </ul>
         <Link to="/songs/new" className="btn-floating btn-large red right">
