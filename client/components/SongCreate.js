@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Link, hashHistory } from 'react-router';
 
 import query from '../queries/fetch-songs';
-
-const mutation = gql`
-  mutation AddSong($title: String) {
-    addSong(title: $title) {
-      id
-      title
-    }
-  }
-`;
+import mutation from '../queries/add-song'
 
 class SongCreate extends Component {
   state = {
