@@ -1,5 +1,5 @@
-# GraphQL with React code and notes
+# auth-graphql-starter
+Starter project from a GraphQL course on Udemy.com - Section 3!
 
-## Resources
-
-[Class Codebase](https://github.com/StephenGrider/GraphQLCasts)
+## Original Repo:
+[auth-graphql-starter](https://github.com/StephenGrider/auth-graphql-starter)
